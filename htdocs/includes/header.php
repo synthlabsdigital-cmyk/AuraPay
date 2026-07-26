@@ -50,22 +50,22 @@ $notifList = Notification::forUser((int) Session::userId(), 5);
 
         <nav class="sidebar-nav">
             <div class="nav-section-label">Account</div>
-            <a href="<?= BASE_PATH ?>/dashboard.php" class="nav-link <?= activeNav('dashboard.php') ?>"><i class="bi bi-grid-1x2"></i> Dashboard</a>
-            <a href="<?= BASE_PATH ?>/profile.php" class="nav-link <?= activeNav('profile.php') ?>"><i class="bi bi-person-circle"></i> Profile</a>
-            <a href="<?= BASE_PATH ?>/documents.php" class="nav-link <?= activeNav('documents.php') ?>"><i class="bi bi-file-earmark-text"></i> Documents</a>
-            <a href="<?= BASE_PATH ?>/credit_evaluation.php" class="nav-link <?= activeNav('credit_evaluation.php') ?>"><i class="bi bi-graph-up-arrow"></i> Credit Evaluation</a>
-            <a href="<?= BASE_PATH ?>/apply_loan.php" class="nav-link <?= activeNav('apply_loan.php') ?>"><i class="bi bi-cash-coin"></i> Apply for Loan</a>
-            <a href="<?= BASE_PATH ?>/loan_history.php" class="nav-link <?= activeNav('loan_history.php') ?>"><i class="bi bi-clock-history"></i> Loan History</a>
-            <a href="<?= BASE_PATH ?>/payments.php" class="nav-link <?= activeNav('payments.php') ?>"><i class="bi bi-credit-card"></i> Payments</a>
-            <a href="<?= BASE_PATH ?>/transactions.php" class="nav-link <?= activeNav('transactions.php') ?>"><i class="bi bi-arrow-left-right"></i> Transactions</a>
-            <a href="<?= BASE_PATH ?>/timeline.php" class="nav-link <?= activeNav('timeline.php') ?>"><i class="bi bi-diagram-3"></i> Timeline</a>
-            <a href="<?= BASE_PATH ?>/notifications.php" class="nav-link <?= activeNav('notifications.php') ?>">
+            <a href="<?= BASE_PATH ?>/pages/dashboard.php" class="nav-link <?= activeNav('dashboard.php') ?>"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+            <a href="<?= BASE_PATH ?>/pages/profile.php" class="nav-link <?= activeNav('profile.php') ?>"><i class="bi bi-person-circle"></i> Profile</a>
+            <a href="<?= BASE_PATH ?>/pages/documents.php" class="nav-link <?= activeNav('documents.php') ?>"><i class="bi bi-file-earmark-text"></i> Documents</a>
+            <a href="<?= BASE_PATH ?>/pages/credit_evaluation.php" class="nav-link <?= activeNav('credit_evaluation.php') ?>"><i class="bi bi-graph-up-arrow"></i> Credit Evaluation</a>
+            <a href="<?= BASE_PATH ?>/pages/apply_loan.php" class="nav-link <?= activeNav('apply_loan.php') ?>"><i class="bi bi-cash-coin"></i> Apply for Loan</a>
+            <a href="<?= BASE_PATH ?>/pages/loan_history.php" class="nav-link <?= activeNav('loan_history.php') ?>"><i class="bi bi-clock-history"></i> Loan History</a>
+            <a href="<?= BASE_PATH ?>/pages/payments.php" class="nav-link <?= activeNav('payments.php') ?>"><i class="bi bi-credit-card"></i> Payments</a>
+            <a href="<?= BASE_PATH ?>/pages/transactions.php" class="nav-link <?= activeNav('transactions.php') ?>"><i class="bi bi-arrow-left-right"></i> Transactions</a>
+            <a href="<?= BASE_PATH ?>/pages/timeline.php" class="nav-link <?= activeNav('timeline.php') ?>"><i class="bi bi-diagram-3"></i> Timeline</a>
+            <a href="<?= BASE_PATH ?>/pages/notifications.php" class="nav-link <?= activeNav('notifications.php') ?>">
                 <i class="bi bi-bell"></i> Notifications
                 <?php if ($unreadNotifs > 0): ?>
                     <span class="badge badge-gold ms-auto"><?= $unreadNotifs ?></span>
                 <?php endif; ?>
             </a>
-            <a href="<?= BASE_PATH ?>/settings.php" class="nav-link <?= activeNav('settings.php') ?>"><i class="bi bi-gear"></i> Settings</a>
+            <a href="<?= BASE_PATH ?>/pages/settings.php" class="nav-link <?= activeNav('settings.php') ?>"><i class="bi bi-gear"></i> Settings</a>
         </nav>
 
         <div class="sidebar-footer">
@@ -99,7 +99,7 @@ $notifList = Notification::forUser((int) Session::userId(), 5);
                         <?php if (empty($notifList)): ?>
                             <div class="dropdown-item text-muted">No notifications</div>
                         <?php else: foreach ($notifList as $n): ?>
-                            <a class="dropdown-item <?= $n['is_read'] ? '' : 'fw-semibold' ?>" href="<?= BASE_PATH ?>/notifications.php">
+                            <a class="dropdown-item <?= $n['is_read'] ? '' : 'fw-semibold' ?>" href="<?= BASE_PATH ?>/pages/notifications.php">
                                 <div class="d-flex justify-content-between align-items-start">
                                     <span style="font-size: 0.875rem; color: var(--ink);"><?= htmlspecialchars($n['title']) ?></span>
                                 </div>
@@ -107,7 +107,7 @@ $notifList = Notification::forUser((int) Session::userId(), 5);
                             </a>
                         <?php endforeach; endif; ?>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-center small" href="<?= BASE_PATH ?>/notifications.php" style="color: var(--gold-bright);">View all</a>
+                        <a class="dropdown-item text-center small" href="<?= BASE_PATH ?>/pages/notifications.php" style="color: var(--gold-bright);">View all</a>
                     </div>
                 </div>
 
@@ -118,8 +118,8 @@ $notifList = Notification::forUser((int) Session::userId(), 5);
                         <span class="d-none d-md-inline" style="color: var(--ink); font-weight: 500; font-size: 0.875rem;"><?= htmlspecialchars($currentUser['first_name'] ?? '') ?></span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="<?= BASE_PATH ?>/profile.php"><i class="bi bi-person me-2"></i>My Profile</a>
-                        <a class="dropdown-item" href="<?= BASE_PATH ?>/settings.php"><i class="bi bi-gear me-2"></i>Settings</a>
+                        <a class="dropdown-item" href="<?= BASE_PATH ?>/pages/profile.php"><i class="bi bi-person me-2"></i>My Profile</a>
+                        <a class="dropdown-item" href="<?= BASE_PATH ?>/pages/settings.php"><i class="bi bi-gear me-2"></i>Settings</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item text-danger" href="<?= BASE_PATH ?>/auth/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Sign out</a>
                     </div>

@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $notifications = Database::fetchAll('SELECT * FROM notifications WHERE user_id = :uid ORDER BY created_at DESC', [':uid' => $userId]);
+$routes = require CONFIG_PATH . '/routes.php';
 $iconMap = [
     'info' => 'info-circle text-info',
     'success' => 'check-circle text-success',
@@ -75,7 +76,8 @@ $iconMap = [
                         </div>
                         <p class="mb-0 small text-muted <?= $n['is_read'] ? '' : 'fw-normal' ?>"><?= htmlspecialchars($n['message']) ?></p>
                         <?php if ($n['link']): ?>
-                            <a href="<?= htmlspecialchars($n['link']) ?>" class="small">View &rarr;</a>
+                            <?php $linkPath = $routes[$n['link']] ?? $n['link']; ?>
+                            <a href="<?= BASE_PATH . '/' . ltrim($linkPath, '/') ?>" class="small">View &rarr;</a>
                         <?php endif; ?>
                     </div>
                     <?php if (!$n['is_read']): ?>

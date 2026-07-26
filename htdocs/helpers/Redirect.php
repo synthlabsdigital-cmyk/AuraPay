@@ -14,7 +14,8 @@ final class Redirect
     public static function to(string $route, array $params = []): void
     {
         $routes = require CONFIG_PATH . '/routes.php';
-        $url = $routes[$route] ?? $route;
+        $path = $routes[$route] ?? $route;
+        $url = BASE_PATH . '/' . ltrim($path, '/');
 
         if (!empty($params)) {
             $url .= (str_contains($url, '?') ? '&' : '?') . http_build_query($params);

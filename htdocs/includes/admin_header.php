@@ -40,7 +40,7 @@ $active = basename($_SERVER['PHP_SELF'] ?? '');
 
     <!-- Sidebar -->
     <aside class="admin-sidebar" id="adminSidebar">
-        <a href="<?= BASE_PATH ?>/dashboard.php" class="sidebar-brand">
+        <a href="<?= BASE_PATH ?>/admin/dashboard.php" class="sidebar-brand">
             <span class="brand-icon" style="background: linear-gradient(135deg, var(--obsidian-4), var(--obsidian-3)); color: var(--gold-bright); border: 1px solid rgba(212,175,122,0.3);">
                 <i class="bi bi-shield-lock"></i>
             </span>
@@ -52,22 +52,22 @@ $active = basename($_SERVER['PHP_SELF'] ?? '');
 
         <nav class="sidebar-nav">
             <div class="nav-section-label">Operations</div>
-            <a href="<?= BASE_PATH ?>/dashboard.php" class="nav-link <?= $active === 'dashboard.php' ? 'active' : '' ?>"><i class="bi bi-speedometer2"></i> Dashboard</a>
-            <a href="<?= BASE_PATH ?>/customers.php" class="nav-link <?= $active === 'customers.php' ? 'active' : '' ?>"><i class="bi bi-people"></i> Customers</a>
-            <a href="<?= BASE_PATH ?>/applications.php" class="nav-link <?= $active === 'applications.php' ? 'active' : '' ?>"><i class="bi bi-file-earmark-text"></i> Applications</a>
-            <a href="<?= BASE_PATH ?>/loans.php" class="nav-link <?= $active === 'loans.php' ? 'active' : '' ?>"><i class="bi bi-cash-stack"></i> Loans</a>
-            <a href="<?= BASE_PATH ?>/credit_evaluation.php" class="nav-link <?= $active === 'credit_evaluation.php' ? 'active' : '' ?>"><i class="bi bi-graph-up-arrow"></i> Credit Evaluations</a>
-            <a href="<?= BASE_PATH ?>/transactions.php" class="nav-link <?= $active === 'transactions.php' ? 'active' : '' ?>"><i class="bi bi-arrow-left-right"></i> Transactions</a>
-            <a href="<?= BASE_PATH ?>/reports.php" class="nav-link <?= $active === 'reports.php' ? 'active' : '' ?>"><i class="bi bi-bar-chart-line"></i> Reports</a>
-            <a href="<?= BASE_PATH ?>/activity_logs.php" class="nav-link <?= $active === 'activity_logs.php' ? 'active' : '' ?>"><i class="bi bi-journal-text"></i> Activity Logs</a>
+            <a href="<?= BASE_PATH ?>/admin/dashboard.php" class="nav-link <?= $active === 'dashboard.php' ? 'active' : '' ?>"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a href="<?= BASE_PATH ?>/admin/customers.php" class="nav-link <?= $active === 'customers.php' ? 'active' : '' ?>"><i class="bi bi-people"></i> Customers</a>
+            <a href="<?= BASE_PATH ?>/admin/applications.php" class="nav-link <?= $active === 'applications.php' ? 'active' : '' ?>"><i class="bi bi-file-earmark-text"></i> Applications</a>
+            <a href="<?= BASE_PATH ?>/admin/loans.php" class="nav-link <?= $active === 'loans.php' ? 'active' : '' ?>"><i class="bi bi-cash-stack"></i> Loans</a>
+            <a href="<?= BASE_PATH ?>/admin/credit_evaluation.php" class="nav-link <?= $active === 'credit_evaluation.php' ? 'active' : '' ?>"><i class="bi bi-graph-up-arrow"></i> Credit Evaluations</a>
+            <a href="<?= BASE_PATH ?>/admin/transactions.php" class="nav-link <?= $active === 'transactions.php' ? 'active' : '' ?>"><i class="bi bi-arrow-left-right"></i> Transactions</a>
+            <a href="<?= BASE_PATH ?>/admin/reports.php" class="nav-link <?= $active === 'reports.php' ? 'active' : '' ?>"><i class="bi bi-bar-chart-line"></i> Reports</a>
+            <a href="<?= BASE_PATH ?>/admin/activity_logs.php" class="nav-link <?= $active === 'activity_logs.php' ? 'active' : '' ?>"><i class="bi bi-journal-text"></i> Activity Logs</a>
             <?php if (in_array($role, [ROLE_SUPER_ADMIN, ROLE_ADMIN], true)): ?>
-            <a href="<?= BASE_PATH ?>/configuration.php" class="nav-link <?= $active === 'configuration.php' ? 'active' : '' ?>"><i class="bi bi-sliders"></i> Configuration</a>
-            <a href="<?= BASE_PATH ?>/maintenance.php" class="nav-link <?= $active === 'maintenance.php' ? 'active' : '' ?>"><i class="bi bi-tools"></i> Maintenance</a>
+            <a href="<?= BASE_PATH ?>/admin/configuration.php" class="nav-link <?= $active === 'configuration.php' ? 'active' : '' ?>"><i class="bi bi-sliders"></i> Configuration</a>
+            <a href="<?= BASE_PATH ?>/admin/maintenance.php" class="nav-link <?= $active === 'maintenance.php' ? 'active' : '' ?>"><i class="bi bi-tools"></i> Maintenance</a>
             <?php endif; ?>
         </nav>
 
         <div class="sidebar-footer">
-            <a href="<?= BASE_PATH ?>/logout.php" class="nav-link" style="color: rgba(251,113,133,0.7);">
+            <a href="<?= BASE_PATH ?>/admin/logout.php" class="nav-link" style="color: rgba(251,113,133,0.7);">
                 <i class="bi bi-box-arrow-right"></i> Sign out
             </a>
         </div>
@@ -90,7 +90,7 @@ $active = basename($_SERVER['PHP_SELF'] ?? '');
                         <span class="badge badge-neutral"><?= htmlspecialchars(ucfirst(str_replace('_', ' ', $role ?? 'admin'))) ?></span>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item text-danger" href="<?= BASE_PATH ?>/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Sign out</a>
+                        <a class="dropdown-item text-danger" href="<?= BASE_PATH ?>/admin/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Sign out</a>
                     </div>
                 </div>
             </div>
