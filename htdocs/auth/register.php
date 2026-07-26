@@ -10,6 +10,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../config/constants.php';
+require_once __DIR__ . '/../includes/product.php';
 $pageTitle = 'Create your account';
 $authSubtitle = 'Join ' . htmlspecialchars(product()['name']) . ' and apply for a loan in minutes.';
 require_once __DIR__ . '/../includes/auth_header.php';
