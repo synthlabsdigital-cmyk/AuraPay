@@ -1,0 +1,59 @@
+/* ===================================================================
+   AuraPay — Auth page styles
+   =================================================================== */
+
+.auth-body {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.auth-wrapper { width: 100%; max-width: 480px; }
+
+.auth-card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.auth-brand { display: flex; justify-content: center; margin-bottom: 1.5rem; }
+.auth-brand a {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; color: var(--primary);
+    font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700;
+}
+.auth-brand .brand-icon { font-size: 1.75rem; color: var(--accent); }
+
+.auth-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+.auth-subtitle { color: var(--text-muted); margin-bottom: 2rem; }
+
+.auth-form { display: flex; flex-direction: column; gap: 1rem; }
+.auth-form .form-control { padding: 0.75rem 1rem; border-radius: 8px; }
+.auth-form label { font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
+
+.auth-btn { padding: 0.75rem; font-weight: 600; border-radius: 8px; }
+
+.auth-links { text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.875rem; }
+.auth-links a { margin-left: 0.5rem; font-weight: 500; }
+
+.auth-footer {
+    text-align: center; margin-top: 1.5rem;
+    color: rgba(255,255,255,0.7); font-size: 0.8rem;
+    display: flex; justify-content: space-between;
+}
+
+.otp-input {
+    text-align: center; font-size: 1.5rem;
+    letter-spacing: 0.5em; font-weight: 600;
+    padding: 0.75rem;
+}
+
+.dev-otp-code {
+    font-size: 2rem; font-weight: 700;
+    letter-spacing: 0.3em; color: var(--primary);
+    font-family: monospace;
+}

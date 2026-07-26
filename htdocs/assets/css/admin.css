@@ -1,0 +1,39 @@
+/* ===================================================================
+   AuraPay — Admin-specific styles
+   Overrides and additions for the admin portal.
+   =================================================================== */
+
+.admin-body { background: var(--bg); }
+
+.admin-sidebar { background: #0A1F33; }
+.admin-sidebar .sidebar-brand { color: #fff; }
+.admin-sidebar .sidebar-brand .brand-icon { color: var(--accent); }
+.admin-sidebar .sidebar-nav .nav-link {
+    color: rgba(255,255,255,0.65);
+    border-left: 3px solid transparent;
+}
+.admin-sidebar .sidebar-nav .nav-link:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+}
+.admin-sidebar .sidebar-nav .nav-link.active {
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+    border-left-color: var(--accent);
+}
+.admin-sidebar .sidebar-footer .nav-link { color: rgba(255,255,255,0.65); }
+.admin-sidebar .sidebar-footer .nav-link:hover { color: #fff; }
+
+.admin-topbar { background: var(--surface); }
+
+.stat-card { background: var(--surface); }
+.stat-mini { background: var(--surface); }
+
+/* Table refinements */
+.table > :not(caption) > * > * { padding: 0.75rem 1rem; }
+.table thead th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+.table tbody tr:hover { background: var(--bg-alt); }
+
+/* Modal refinements */
+.modal-header { border-bottom: 1px solid var(--border); }
+.modal-footer { border-top: 1px solid var(--border); }
