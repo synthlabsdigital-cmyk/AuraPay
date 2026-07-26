@@ -21,20 +21,25 @@ final class Redirect
             $url .= (str_contains($url, '?') ? '&' : '?') . http_build_query($params);
         }
 
-        header('Location: ' . $url, true, 302);
-        exit;
+        self::send($url);
     }
 
     public static function toUrl(string $url): void
     {
-        header('Location: ' . $url, true, 302);
-        exit;
+        self::send($url);
     }
 
     public static function back(): void
     {
-        $referer = $_SERVER['HTTP_REFERER'] ?? '/';
-        header('Location: ' . $referer, true, 302);
+        self::send($_SERVER['HTTP_REFERER'] ?? '/');
+    }
+
+    private static function send(string $url): void
+    {
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+        header('Location: ' . $url, true, 302);
         exit;
     }
 }

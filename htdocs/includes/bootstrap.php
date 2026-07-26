@@ -8,6 +8,11 @@
 
 declare(strict_types=1);
 
+// Start output buffering so redirects can discard pending output
+if (!ob_get_level()) {
+    ob_start();
+}
+
 // Error reporting
 $appCfg = require CONFIG_PATH . '/app.php';
 if ($appCfg['debug']) {
