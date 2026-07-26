@@ -29,7 +29,7 @@ $variant = $authVariant ?? 'customer';
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="assets/css/aurapay.css" rel="stylesheet">
+    <link href="<?= BASE_PATH ?>/assets/css/aurapay.css" rel="stylesheet">
 </head>
 <body class="auth-body">
 
@@ -40,7 +40,7 @@ $variant = $authVariant ?? 'customer';
         <div class="glow-2"></div>
 
         <div class="auth-editorial-content">
-            <a href="../index.php" class="auth-brand-link">
+            <a href="<?= BASE_PATH ?>/index.php" class="auth-brand-link">
                 <span class="auth-brand-icon">
                     <i class="bi <?= $variant === 'admin' ? 'bi-shield-check' : 'bi-wallet2' ?>"></i>
                 </span>
