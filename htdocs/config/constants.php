@@ -166,3 +166,50 @@ define('INCLUDE_PATH', ROOT_PATH . '/includes');
 define('UPLOAD_PATH', ROOT_PATH . '/uploads');
 define('LOG_PATH', ROOT_PATH . '/logs');
 define('STORAGE_PATH', ROOT_PATH . '/storage');
+
+
+// ---------------------------------------------------------------------------
+// Deployment Base Path / Base URL
+// ---------------------------------------------------------------------------
+// Provides a single, robust BASE_PATH (path prefix) and BASE_URL (absolute URL)
+// so templates can reference /assets/... correctly whether the app is installed
+// at the webroot or inside a single subdirectory.
+if (!defined('BASE_PATH')) {
+    $basePath = '';
+
+    if (PHP_SAPI !== 'cli') {
+        // Prefer computing the base path by comparing the filesystem root (DOCUMENT_ROOT)
+        // with the application's filesystem path (ROOT_PATH). This works even when
+        // pages inside subdirectories are requested directly (e.g. /admin/dashboard.php).
+        $docRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '') ?: '';
+        $rootReal = realpath(ROOT_PATH) ?: '';
+
+        if ($docRoot !== '' && $rootReal !== '' && strpos($rootReal, $docRoot) === 0) {
+            $relative = substr($rootReal, strlen($docRoot));
+            $relative = str_replace('\\', '/', $relative);
+            $basePath = $relative === '' ? '' : ('/' . trim($relative, '/'));
+        } else {
+            // Fallback: derive from SCRIPT_NAME. This is used only if DOCUMENT_ROOT
+            // based detection fails (e.g., unusual server setups).
+            $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+            $dir = dirname(str_replace('\\', '/', $scriptName));
+            if ($dir === '/' || $dir === '.' ) {
+                $dir = '';
+            }
+            $basePath = $dir;
+        }
+    }
+
+    define('BASE_PATH', $basePath);
+
+    // BASE_URL (absolute) for cases where a full URL is required.
+    $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+               || (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
+    $protocol = $isHttps ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? '');
+    if ($host !== '') {
+        define('BASE_URL', $protocol . '://' . rtrim($host, '/') . BASE_PATH);
+    } else {
+        define('BASE_URL', BASE_PATH);
+    }
+}
