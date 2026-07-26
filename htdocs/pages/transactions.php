@@ -25,7 +25,9 @@ if ($statusFilter) { $where .= ' AND status = :s'; $params[':s'] = $statusFilter
 $total = Database::count("SELECT COUNT(*) FROM transactions $where", $params);
 $pagination = Util::paginate($total, $perPage, $page);
 
-$sql = "SELECT * FROM transactions $where ORDER BY transaction_date DESC LIMIT $perPage OFFSET {$pagination['offset']}";
+$sql = "SELECT * FROM transactions $where ORDER BY transaction_date DESC LIMIT :lim OFFSET :off";
+$params[':lim'] = $perPage;
+$params[':off'] = $pagination['offset'];
 $transactions = Database::fetchAll($sql, $params);
 $types = ['disbursement' => 'Disbursement', 'repayment' => 'Repayment', 'fee' => 'Fee', 'interest' => 'Interest', 'penalty' => 'Penalty', 'adjustment' => 'Adjustment'];
 $statuses = ['pending' => 'Pending', 'completed' => 'Completed', 'failed' => 'Failed'];

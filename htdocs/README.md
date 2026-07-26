@@ -28,21 +28,20 @@ mysql -u root -p aurapay < database/seed.sql
 
 ### 2. Configuration
 
-Create a `.env` file or set environment variables:
+Edit `config/database.php` with your MySQL credentials:
 
+```php
+return [
+    'host'    => '127.0.0.1',
+    'port'    => 3306,
+    'name'    => 'aurapay',
+    'user'    => 'your_db_user',
+    'pass'    => 'your_db_password',
+    'charset' => 'utf8mb4',
+];
 ```
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_NAME=aurapay
-DB_USER=root
-DB_PASS=your_password
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://your-domain.com
-SUPPORT_EMAIL=support@aurapay.ph
-SUPPORT_PHONE=+63 2 8888 8888
-SESSION_LIFETIME=7200
-```
+
+Application-level settings (name, timezone, currency, support contact) are in `config/app.php`. Product branding and loan/credit parameters are in `config/product.php`. No `.env` file or environment variables are required.
 
 ### 3. File Permissions
 

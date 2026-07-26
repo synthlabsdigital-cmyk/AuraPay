@@ -114,29 +114,36 @@ final class Auth
             return ['success' => false, 'message' => 'Passwords do not match.'];
         }
 
-        $userId = Database::insert('users', [
-            'first_name'     => ucfirst(trim($data['first_name'])),
-            'middle_name'    => !empty($data['middle_name']) ? ucfirst(trim($data['middle_name'])) : null,
-            'last_name'      => ucfirst(trim($data['last_name'])),
-            'email'          => $email,
-            'password_hash'  => password_hash($data['password'], PASSWORD_BCRYPT),
-            'phone'          => trim($data['phone']),
-            'user_type'      => USER_TYPE_CUSTOMER,
-            'status'         => USER_STATUS_PENDING,
-        ]);
+        try {
+            return Database::transaction(function () use ($data, $email) {
+                $userId = Database::insert('users', [
+                    'first_name'     => ucfirst(trim($data['first_name'])),
+                    'middle_name'    => !empty($data['middle_name']) ? ucfirst(trim($data['middle_name'])) : null,
+                    'last_name'      => ucfirst(trim($data['last_name'])),
+                    'email'          => $email,
+                    'password_hash'  => password_hash($data['password'], PASSWORD_BCRYPT),
+                    'phone'          => trim($data['phone']),
+                    'user_type'      => USER_TYPE_CUSTOMER,
+                    'status'         => USER_STATUS_PENDING,
+                ]);
 
-        Database::insert('user_profiles', ['user_id' => $userId]);
+                Database::insert('user_profiles', ['user_id' => $userId]);
 
-        $otp = Otp::generate($userId, 'registration');
+                $otp = Otp::generate($userId, 'registration');
 
-        ActivityLog::record(
-            type: LOG_CREATE,
-            description: 'New customer registered: ' . $email,
-            userId: $userId,
-            severity: LOG_SEVERITY_INFO
-        );
+                ActivityLog::record(
+                    type: LOG_CREATE,
+                    description: 'New customer registered: ' . $email,
+                    userId: $userId,
+                    severity: LOG_SEVERITY_INFO
+                );
 
-        return ['success' => true, 'user_id' => $userId, 'otp' => $otp];
+                return ['success' => true, 'user_id' => $userId, 'otp' => $otp];
+            });
+        } catch (Throwable $e) {
+            ErrorHelper::log('errors', 'Registration failed: ' . $e->getMessage(), $e->getTraceAsString());
+            return ['success' => false, 'message' => 'We could not create your account right now. Please try again.'];
+        }
     }
 
     public static function verifyEmail(int $userId, string $code): array

@@ -18,7 +18,8 @@ $pagination = Util::paginate($total, $perPage, $page);
 $evals = Database::fetchAll(
     "SELECT ce.*, u.first_name, u.last_name, u.email
      FROM credit_evaluations ce JOIN users u ON ce.user_id = u.id
-     ORDER BY ce.created_at DESC LIMIT $perPage OFFSET {$pagination['offset']}"
+     ORDER BY ce.created_at DESC LIMIT :lim OFFSET :off",
+    [':lim' => $perPage, ':off' => $pagination['offset']]
 );
 ?>
 

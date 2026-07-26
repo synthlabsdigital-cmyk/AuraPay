@@ -47,7 +47,9 @@ if ($statusFilter) {
 $total = Database::count("SELECT COUNT(*) FROM users $where", $params);
 $pagination = Util::paginate($total, $perPage, $page);
 
-$sql = "SELECT * FROM users $where ORDER BY created_at DESC LIMIT $perPage OFFSET {$pagination['offset']}";
+$sql = "SELECT * FROM users $where ORDER BY created_at DESC LIMIT :lim OFFSET :off";
+$params[':lim'] = $perPage;
+$params[':off'] = $pagination['offset'];
 $customers = Database::fetchAll($sql, $params);
 ?>
 

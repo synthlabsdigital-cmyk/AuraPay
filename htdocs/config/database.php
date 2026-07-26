@@ -2,17 +2,16 @@
 /**
  * Database Configuration
  *
- * Central database connection settings for the Lending Platform Framework.
- * Values are loaded from environment variables with sensible defaults.
+ * Central database connection settings for AuraPay.
+ * Update these values for your hosting environment (e.g. InfinityFree).
  */
-
 declare(strict_types=1);
 
 return [
-    'host'    => getenv('DB_HOST') ?: '127.0.0.1',
-    'port'    => (int)(getenv('DB_PORT') ?: 3306),
-    'name'    => getenv('DB_NAME') ?: 'aurapay',
-    'user'    => getenv('DB_USER') ?: 'root',
-    'pass'    => getenv('DB_PASS') ?: '',
+    'host'    => '127.0.0.1',
+    'port'    => 3306,
+    'name'    => 'aurapay',
+    'user'    => 'root',
+    'pass'    => '',
     'charset' => 'utf8mb4',
 ];

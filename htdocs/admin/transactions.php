@@ -30,7 +30,9 @@ $total = Database::count("SELECT COUNT(*) FROM transactions t JOIN users u ON t.
 $pagination = Util::paginate($total, $perPage, $page);
 $sql = "SELECT t.*, u.first_name, u.last_name, u.email
         FROM transactions t JOIN users u ON t.user_id = u.id
-        $where ORDER BY t.transaction_date DESC LIMIT $perPage OFFSET {$pagination['offset']}";
+        $where ORDER BY t.transaction_date DESC LIMIT :lim OFFSET :off";
+$params[':lim'] = $perPage;
+$params[':off'] = $pagination['offset'];
 $transactions = Database::fetchAll($sql, $params);
 $types = ['disbursement'=>'Disbursement','repayment'=>'Repayment','fee'=>'Fee','interest'=>'Interest','penalty'=>'Penalty','adjustment'=>'Adjustment'];
 ?>

@@ -25,6 +25,28 @@ if ($appCfg['debug']) {
 
 date_default_timezone_set($appCfg['timezone']);
 
+// Global exception handler — prevents white screens on uncaught errors
+set_exception_handler(function (Throwable $e) use ($appCfg) {
+    while (ob_get_level() > 0) {
+        ob_end_clean();
+    }
+    if (!headers_sent()) {
+        http_response_code(500);
+        header('Content-Type: text/html; charset=UTF-8');
+    }
+    if ($appCfg['debug']) {
+        echo '<h1>Application Error</h1><pre>' . htmlspecialchars($e->getMessage() . "\n\n" . $e->getTraceAsString()) . '</pre>';
+    } else {
+        echo '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Error</title>';
+        echo '<style>body{font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f8fafb;color:#1e293b}';
+        echo '.card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:2.5rem;max-width:420px;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.08)}';
+        echo 'h1{font-size:1.25rem;margin:0 0 .5rem}p{color:#64748b;margin:0 0 1.5rem;font-size:.95rem}';
+        echo 'a{display:inline-block;padding:.6rem 1.5rem;background:#0F4C81;color:#fff;text-decoration:none;border-radius:8px;font-size:.9rem}</style></head>';
+        echo '<body><div class="card"><h1>Something went wrong</h1><p>We encountered an unexpected error. Please try again in a moment.</p>';
+        echo '<a href="javascript:history.back()">Try again</a></div></body></html>';
+    }
+});
+
 // Load all helpers
 require_once HELPER_PATH . '/helpers.php';
 

@@ -31,7 +31,9 @@ $total = Database::count("SELECT COUNT(*) FROM loans l JOIN users u ON l.user_id
 $pagination = Util::paginate($total, $perPage, $page);
 $sql = "SELECT l.*, u.first_name, u.last_name, u.email
         FROM loans l JOIN users u ON l.user_id = u.id
-        $where ORDER BY l.created_at DESC LIMIT $perPage OFFSET {$pagination['offset']}";
+        $where ORDER BY l.created_at DESC LIMIT :lim OFFSET :off";
+$params[':lim'] = $perPage;
+$params[':off'] = $pagination['offset'];
 $loans = Database::fetchAll($sql, $params);
 
 $statuses = ['pending'=>'Pending','under_review'=>'Under Review','approved'=>'Approved','rejected'=>'Rejected','active'=>'Active','completed'=>'Completed','defaulted'=>'Defaulted','closed'=>'Closed'];
